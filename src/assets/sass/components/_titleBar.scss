@@ -1,0 +1,15 @@
+.titlebar {
+    // display: block;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    -webkit-app-region: drag;
+    background-color: rgb(44, 43, 43);
+    
+    &__title {
+        color: $text-color;
+        width: fit-content;
+        margin: auto;
+        padding-top: 10px;
+    }
+}
