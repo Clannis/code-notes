@@ -1,14 +1,21 @@
+// Abstracts
 @import "abstracts/functions";
 @import "abstracts/mixins";
 @import "abstracts/variables";
 
+// Base
 @import "base/animations";
 @import "base/base";
 @import "base/typography";
 @import "base/utilities";
 
+// Components
 @import "components/titleBar";
 
+//Layout
 @import "layout/root";
 
+// Pages
 @import "pages/home";
+
+// Themes

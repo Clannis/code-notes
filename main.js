@@ -24,10 +24,10 @@ if (process.platform === 'win32') {
 }
 
 function createWindow() {
-  // Create the browser window.
+  // Create the frameless browser window.
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    width: 1200,
+    height: 800,
     show: false,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
