@@ -46,8 +46,11 @@
     "postpackage": "electron-packager ./ --out=./builds"
   },
   "dependencies": {
+    "brace": "^0.11.1",
     "postcss": "^8.2.8",
+    "prismjs": "^1.23.0",
     "react": "^17.0.1",
+    "react-ace": "^9.4.0",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {

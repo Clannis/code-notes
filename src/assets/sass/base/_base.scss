@@ -1,20 +1,23 @@
 *,
 *::after,
 *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit; // forces all (*) elements to inherit this CSS property 
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; // forces all (*) elements to inherit this CSS property
 }
 
 html {
-    // defines 1rem size as 10px
-    font-size: 62.5%; // default browser font size is 16px 62.5% of 16 is 10px (our wanted default font size)
+  // defines 1rem size as 10px
+  font-size: 62.5%; // default browser font size is 16px 62.5% of 16 is 10px (our wanted default font size)
 }
 
-body  {
-    box-sizing: border-box; // set this inherited CSS property at the base element we want to use it in
-    padding: 0;
-    margin: 0;
-    background-color: $background-color;
-    color: $text-color;
+body {
+  box-sizing: border-box; // set this inherited CSS property at the base element we want to use it in
+  padding: 0;
+  margin: 0;
+  background-color: $background-color;
+  color: $text-color;
+  height: 95vh;
+  overflow: hidden;
+  // width: 100vw;
 }

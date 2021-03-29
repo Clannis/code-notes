@@ -70,6 +70,11 @@ function createWindow() {
     }
   })
 
+  mainWindow.on('resize', (e) => {
+    console.log('window: ', mainWindow.getContentSize())
+    mainWindow.webContents.send('window:resize', mainWindow.getContentSize())
+  })
+
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
