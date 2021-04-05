@@ -20,8 +20,8 @@ const App = () => {
   const body = document.body
 
   useEffect(() => {
-    setWindowColor()  
-    setTextColor()
+    setWindowBackgroundColor()  
+    setTitlebarTextColor()
     ipcRenderer.on('window:resize', (e, sizes) => {
       setWindowHeight(Math.floor((sizes[1] - 60)));
       setWindowWidth(Math.floor((sizes[0] - 40)));
@@ -38,14 +38,14 @@ const App = () => {
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
 
-  function setWindowColor() {
+  function setWindowBackgroundColor() {
     const target_obj = document.getElementsByClassName('ace_scroller')[0];
     const color = getComputedStyle(target_obj).backgroundColor;
     const hex = rgbToHex(color)
     body.style.backgroundColor = hex;
   }
 
-  function setTextColor() {
+  function setTitlebarTextColor() {
     const target_obj = document.getElementsByClassName('ace_gutter')[0];
     const title = document.getElementsByClassName('titlebar__title')[0]
     const color = getComputedStyle(target_obj).color;
