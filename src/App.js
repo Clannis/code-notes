@@ -1,5 +1,5 @@
 import React, { useState , useRef, useEffect } from 'react';
-const { ipcRenderer, remote } = require('electron');
+import { ipcRenderer, remote } from 'electron';
 import './assets/sass/main.scss';
 import AceEditor from 'react-ace';
 
@@ -13,7 +13,7 @@ import ace from 'react-ace';
 
 const App = () => {
   const [editorLanguage, setEditorLanguage] = useState("ruby");
-  const [theme, setTheme] = useState('solarized_dark')
+  const [theme, setTheme] = useState('twilight')
   const [fontSize, setfontSize] = useState(15);
   const [windowHeight, setWindowHeight] = useState(740);
   const [windowWidth, setWindowWidth] = useState(1160);
@@ -21,8 +21,6 @@ const App = () => {
   const editor = useRef()
 
   useEffect(() => {
-    // console.log(ace)
-    // ace.config.set("themePath", "brace/theme");
     setWindowColor()  
     ipcRenderer.on('window:resize', (e, sizes) => {
       setWindowHeight(Math.floor((sizes[1] - 60)));
@@ -41,25 +39,11 @@ const App = () => {
   }
 
   function setWindowColor() {
-    // const backgroundColor = document.querySelector(`.ace-${theme}`)
-    // [...editor.current.editor.renderer.theme.cssText.matchAll(/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/g)]
-    const mainWindow = remote.getCurrentWindow()
-    // mainWindow.setBackgroundColor(backgroundColor)
-    // mainWindow.blur()
-    // mainWindow.focus()
-    // console.log(editor.current.editor.renderer.theme.cssText.split('.'))
-    console.log(editor.current.editor.renderer.container)
     var target_obj = document.getElementsByClassName('ace_scroller')[0];
     var color = getComputedStyle(target_obj).backgroundColor;
-    
-    console.log(color)
     var hex = rgbToHex(color)
-    console.log(hex)
-    ipcRenderer.send('window:new-color', hex)
-    // mainWindow.setBackgroundColor(`${hex}`)
-    // mainWindow.blur()
-    // mainWindow.focus()
-
+    const body = document.body
+    body.style.backgroundColor = hex;
   }
 
   return (
