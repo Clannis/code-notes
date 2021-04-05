@@ -13,15 +13,18 @@ import ace from 'react-ace';
 
 const App = () => {
   const [editorLanguage, setEditorLanguage] = useState("ruby");
-  const [theme, setTheme] = useState('twilight')
+  const [theme, setTheme] = useState('mono_industrial')
   const [fontSize, setfontSize] = useState(15);
   const [windowHeight, setWindowHeight] = useState(740);
   const [windowWidth, setWindowWidth] = useState(1160);
   const [tabSize, setTabSize] = useState(2)
   const editor = useRef()
+  const body = document.body
+  const title = document.getElementsByClassName('titlebar__title')[0]
 
   useEffect(() => {
     setWindowColor()  
+    setTextColor()
     ipcRenderer.on('window:resize', (e, sizes) => {
       setWindowHeight(Math.floor((sizes[1] - 60)));
       setWindowWidth(Math.floor((sizes[0] - 40)));
@@ -42,8 +45,15 @@ const App = () => {
     var target_obj = document.getElementsByClassName('ace_scroller')[0];
     var color = getComputedStyle(target_obj).backgroundColor;
     var hex = rgbToHex(color)
-    const body = document.body
     body.style.backgroundColor = hex;
+  }
+
+  function setTextColor() {
+    var target_obj = document.getElementsByClassName('ace_gutter')[0];
+    console.log(title)
+    var color = getComputedStyle(target_obj).color;
+    var hex = rgbToHex(color)
+    title.style.color = hex;
   }
 
   return (
