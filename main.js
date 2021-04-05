@@ -32,7 +32,8 @@ function createWindow() {
     titleBarStyle: 'hiddenInset',
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
+      enableRemoteModule: true
     }
   })
 
@@ -68,6 +69,10 @@ function createWindow() {
         .catch(err => console.log('Error loading React DevTools: ', err))
       mainWindow.webContents.openDevTools()
     }
+  })
+
+  mainWindow.on('window:new-color', (e, newColor) => {
+    console.log("im here")
   })
 
   mainWindow.on('resize', (e) => {
