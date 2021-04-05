@@ -8,8 +8,6 @@ import './assets/brace/braceModes'
 
 // Import a Themes (okadia, github, xcode etc)
 import './assets/brace/braceThemes'
-import ace from 'react-ace';
-
 
 const App = () => {
   const [editorLanguage, setEditorLanguage] = useState("ruby");
@@ -20,7 +18,6 @@ const App = () => {
   const [tabSize, setTabSize] = useState(2)
   const editor = useRef()
   const body = document.body
-  const title = document.getElementsByClassName('titlebar__title')[0]
 
   useEffect(() => {
     setWindowColor()  
@@ -32,27 +29,27 @@ const App = () => {
   }, [])
 
   function componentToHex(c) {
-    var hex = Number(c).toString(16);
+    const hex = Number(c).toString(16);
     return hex.length == 1 ? "0" + hex : hex;
   }
   
   function rgbToHex(color) {
-    let [r, g, b] = color.split('(')[1].split(")")[0].split(', ')
+    const [r, g, b] = color.split('(')[1].split(")")[0].split(', ')
     return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
   }
 
   function setWindowColor() {
-    var target_obj = document.getElementsByClassName('ace_scroller')[0];
-    var color = getComputedStyle(target_obj).backgroundColor;
-    var hex = rgbToHex(color)
+    const target_obj = document.getElementsByClassName('ace_scroller')[0];
+    const color = getComputedStyle(target_obj).backgroundColor;
+    const hex = rgbToHex(color)
     body.style.backgroundColor = hex;
   }
 
   function setTextColor() {
-    var target_obj = document.getElementsByClassName('ace_gutter')[0];
-    console.log(title)
-    var color = getComputedStyle(target_obj).color;
-    var hex = rgbToHex(color)
+    const target_obj = document.getElementsByClassName('ace_gutter')[0];
+    const title = document.getElementsByClassName('titlebar__title')[0]
+    const color = getComputedStyle(target_obj).color;
+    const hex = rgbToHex(color)
     title.style.color = hex;
   }
 
