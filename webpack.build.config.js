@@ -45,7 +45,7 @@ module.exports = {
   },
   target: 'electron-renderer',
   plugins: [
-    new HtmlWebpackPlugin({title: 'Code Note'}),
+    new HtmlWebpackPlugin({title: 'Code Notes'}),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional

@@ -1,21 +1,21 @@
 {
-  "name": "electron-react-webpack-boilerplate",
-  "version": "1.15.0",
-  "description": "Minimal Electron, React, PostCSS and Webpack boilerplate to help you get started with building your next app.",
+  "name": "Code Notes",
+  "version": "1.0.0",
+  "description": "Local app for creating code snipets in a minimal environment",
   "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate.git"
+    "url": "https://github.com/Clannis/code-notes.git"
   },
   "homepage": "",
   "bugs": {
-    "url": "https://github.com/alexdevero/electron-react-webpack-boilerplate/issues"
+    "url": "https://github.com/Clannis/code-notes/issues"
   },
   "author": {
-    "name": "Alex Devero",
-    "email": "deveroalex@gmail.com",
-    "url": "https://github.com/alexdevero"
+    "name": "James Dodds",
+    "email": "dodds.james90@gmail.com",
+    "url": "https://github.com/Clannis"
   },
   "keywords": [
     "app",
