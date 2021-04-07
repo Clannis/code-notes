@@ -7,7 +7,9 @@ const url = require('url')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
+const windows = new Set()
 let mainWindow
+let preferencesWindow
 
 // Keep a reference if platform is Mac
 const isMac = process.platform === 'darwin'? true : false
@@ -26,9 +28,27 @@ if (process.platform === 'win32') {
   app.commandLine.appendSwitch('force-device-scale-factor', '1')
 }
 
-function createWindow() {
+function createWindow(setup) {
+  let newWindow = new BrowserWindow(setup);
+
+  newWindow.loadFile('index.html');
+
+  newWindow.once('ready-to-show', () => {
+      newWindow.show();
+  });
+
+  newWindow.on('closed', () => {
+      windows.delete(newWindow);
+      newWindow = null;
+  });
+
+  windows.add(newWindow);
+  return newWindow;
+};  
+
+function createMainWindow() {
   // Create the frameless browser window.
-  mainWindow = new BrowserWindow({
+  mainWindow = createWindow({
     width: 1200,
     height: 800,
     show: false,
@@ -87,6 +107,52 @@ function createWindow() {
   })
 }
 
+function createPreferencesWindow() {
+  // Create the frameless browser window.
+  preferencesWindow = createWindow({
+    width: 600,
+    height: 400,
+    show: false,
+    titleBarStyle: 'hiddenInset',
+    parent: mainWindow,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true
+    }
+  })
+
+  // and load the index.html of the app.
+  let indexPath
+
+  if (isDev && process.argv.indexOf('--noDevServer') === -1) {
+    indexPath = url.format({
+      protocol: 'http:',
+      hash: 'preferences',
+      host: 'localhost:8080',
+      pathname: 'index.html',
+      slashes: true
+    })
+  } else {
+    indexPath = url.format({
+      protocol: 'file:',
+      hash: 'preferences',
+      pathname: path.join(__dirname, 'dist', 'index.html'),
+      slashes: true
+    })
+  }
+
+  preferencesWindow.loadURL(indexPath)
+
+  // Emitted when the window is closed.
+  preferencesWindow.on('closed', function() {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    preferencesWindow = null
+  })
+}
+
 // Create Menu
 const menu = [
   // { role: 'appMenu' }
@@ -97,6 +163,9 @@ const menu = [
           { type: 'separator' },
     { label: 'Preferences',
       accelerator: process.platform === 'darwin' ? 'Cmd+,' : 'Ctrl+,',
+      click: () => {
+        createPreferencesWindow()
+      }
   },
     { type: 'separator' },
     { role: 'services' },
@@ -198,7 +267,7 @@ const menu = [
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  createWindow()
+  createMainWindow()
 
   const mainMenu = Menu.buildFromTemplate(menu)
 	Menu.setApplicationMenu(mainMenu)
