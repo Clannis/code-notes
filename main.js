@@ -161,7 +161,7 @@ const menu = [
       submenu: [
           { role: 'about'},
           { type: 'separator' },
-    { label: 'Preferences',
+    { label: 'Preferences...',
       accelerator: process.platform === 'darwin' ? 'Cmd+,' : 'Ctrl+,',
       click: () => {
         createPreferencesWindow()
