@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const preferencesWindow = () => {
+export const PreferencesWindow = () => {
   return (
     <div>
       <h1>HELLO</h1>

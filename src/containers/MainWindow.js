@@ -8,7 +8,7 @@ import '../assets/brace/braceModes'
 // Import a Themes (okadia, github, xcode etc)
 import '../assets/brace/braceThemes'
 
-export const mainWindow = () => {
+export const MainWindow = () => {
 
   const [editorLanguage, setEditorLanguage] = useState("ruby");
   const [theme, setTheme] = useState('mono_industrial')
