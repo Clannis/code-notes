@@ -1,9 +1,10 @@
 import React from 'react'
+import { TitleBar } from '../components/TitleBar'
 
 export const PreferencesWindow = () => {
   return (
-    <div>
-      <h1>HELLO</h1>
-    </div>
+    <>
+      <TitleBar title={'Preferences'} />
+    </>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState , useRef, useEffect } from 'react';
 import { ipcRenderer, remote } from 'electron';
 import AceEditor from 'react-ace';
+import { TitleBar } from '../components/TitleBar';
 
 // Import a Modes (language)
 import '../assets/brace/braceModes'
@@ -55,6 +56,7 @@ export const MainWindow = () => {
 
   return (
     <>
+      <TitleBar title={'Code Notes'}/>
       <div className="file-tree">
       </div>
       <div className="ace">

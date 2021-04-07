@@ -4,14 +4,15 @@ import { MainWindow } from './containers/MainWindow';
 import { PreferencesWindow } from './containers/PreferencesWindow';
 import './assets/sass/main.scss';
 
-
 const App = () => {
 
   return (
+    <>
     <Router>
-      <Route exact path="/" component={MainWindow}></Route>
-      <Route path="/preferences" component={PreferencesWindow}></Route>
+      <Route exact path="/" component={MainWindow}/>
+      <Route path="/preferences" component={PreferencesWindow}/>
     </Router>
+    </>
   );
 }
 
