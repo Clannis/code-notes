@@ -4,6 +4,7 @@
 const { app, BrowserWindow, ipcMain, Menu } = require('electron')
 const path = require('path')
 const url = require('url')
+const Store = require('./Store')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -28,13 +29,28 @@ if (process.platform === 'win32') {
   app.commandLine.appendSwitch('force-device-scale-factor', '1')
 }
 
+// Init Store & Defaults
+const store = new Store({
+  configName: 'user-settings',
+  defaults: {
+    settings: {
+      theme: 'github',
+      mode: 'javascript',
+      fontSize: 15,
+      tabSize: 2
+    }
+  }
+})
+
+// Create window instance and add to Set
 function createWindow(setup) {
   let newWindow = new BrowserWindow(setup);
 
   newWindow.loadFile('index.html');
 
   newWindow.once('ready-to-show', () => {
-      newWindow.show();
+    mainWindow.webContents.send('settings:get', store.get('settings'))
+    newWindow.show();
   });
 
   newWindow.on('closed', () => {
@@ -46,6 +62,7 @@ function createWindow(setup) {
   return newWindow;
 };  
 
+// Create mainWindow
 function createMainWindow() {
   // Create the frameless browser window.
   mainWindow = createWindow({
@@ -107,6 +124,7 @@ function createMainWindow() {
   })
 }
 
+// Create Preferences window
 function createPreferencesWindow() {
   // Create the frameless browser window.
   preferencesWindow = createWindow({
@@ -164,7 +182,7 @@ const menu = [
     { label: 'Preferences...',
       accelerator: process.platform === 'darwin' ? 'Cmd+,' : 'Ctrl+,',
       click: () => {
-        createPreferencesWindow()
+        preferencesWindow ? preferencesWindow.focus() : createPreferencesWindow()
       }
   },
     { type: 'separator' },
