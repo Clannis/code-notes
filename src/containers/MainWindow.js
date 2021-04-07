@@ -23,10 +23,7 @@ export const MainWindow = () => {
   useEffect(() => {
     setWindowBackgroundColor()  
     setTitlebarTextColor()
-    ipcRenderer.on('window:resize', (e, sizes) => {
-      setWindowHeight(Math.floor((sizes[1] - 60)));
-      setWindowWidth(Math.floor((sizes[0] - 40)));
-    });
+    resizeEditor()
   }, [])
 
   function componentToHex(c) {
@@ -52,6 +49,13 @@ export const MainWindow = () => {
     const color = getComputedStyle(target_obj).color;
     const hex = rgbToHex(color)
     title.style.color = hex;
+  }
+
+  function resizeEditor() {
+    ipcRenderer.on('window:resize', (e, sizes) => {
+      setWindowHeight(Math.floor((sizes[1] - 60)));
+      setWindowWidth(Math.floor((sizes[0] - 40)));
+    });
   }
 
   return (
