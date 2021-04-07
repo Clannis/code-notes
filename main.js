@@ -75,7 +75,6 @@ function createWindow() {
   })
 
   mainWindow.on('resize', (e) => {
-    console.log('window: ', mainWindow.getContentSize())
     mainWindow.webContents.send('window:resize', mainWindow.getContentSize())
   })
 
